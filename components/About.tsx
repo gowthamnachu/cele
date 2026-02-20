@@ -5,7 +5,7 @@ import StaggeredText from "./StaggeredText";
 
 export default function About() {
     return (
-        <section id="about" className="py-40 bg-[#020202] relative overflow-hidden">
+        <section id="about" className="py-24 md:py-40 bg-[#020202] relative overflow-hidden">
             <div className="container mx-auto px-6 md:px-12 relative z-10">
                 <div className="max-w-4xl mb-16 md:mb-32">
                     <motion.div
@@ -22,7 +22,7 @@ export default function About() {
 
                     <StaggeredText
                         text="Crafting Culture through Connection."
-                        className="text-4xl sm:text-6xl md:text-8xl font-black leading-[1] md:leading-[0.9] tracking-tighter uppercase text-white"
+                        className="text-[2.8rem] sm:text-5xl md:text-8xl font-black leading-[0.9] md:leading-[0.9] tracking-tighter uppercase text-white"
                     />
                 </div>
 
@@ -38,7 +38,7 @@ export default function About() {
                         <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                         <div className="relative z-10">
                             <span className="text-[10px] font-black text-white/30 uppercase tracking-[0.3em] mb-4 block">Strategy</span>
-                            <h3 className="text-2xl sm:text-3xl md:text-5xl lg:text-4xl xl:text-3xl font-black text-white uppercase tracking-tight mb-6">Data-Driven Intelligence</h3>
+                            <h3 className="text-[1.25rem] sm:text-3xl md:text-5xl lg:text-4xl xl:text-3xl font-black text-white uppercase tracking-tight mb-4 md:mb-6">Data-Driven Intelligence</h3>
                             <p className="text-sm md:text-lg lg:text-base text-white/50 font-light leading-relaxed max-w-2xl xl:max-w-md">
                                 We leverage multi-layered social metrics and proprietary ROI modeling to ensure every creator association is a calculated success.
                             </p>

@@ -96,7 +96,7 @@ function SpotlightCard({ service, index }: { service: any; index: number }) {
                             {service.title.split(' ')[1]}
                         </span>
                     </h3>
-                    <p className="text-white/40 text-[13px] sm:text-sm md:text-[13px] lg:text-sm leading-relaxed max-w-xs font-light transition-colors group-hover:text-white/60">
+                    <p className="text-white/40 text-sm sm:text-sm md:text-[13px] lg:text-sm leading-[1.7] max-w-xs font-light transition-colors group-hover:text-white/60">
                         {service.description}
                     </p>
                 </div>
@@ -134,7 +134,7 @@ export default function Services() {
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-4xl sm:text-6xl md:text-9xl font-black uppercase tracking-[-0.04em] leading-[0.95] md:leading-[0.85] text-white"
+                        className="text-[2.8rem] sm:text-6xl md:text-9xl font-black uppercase tracking-[-0.04em] leading-[0.9] md:leading-[0.85] text-white"
                     >
                         Strategic <br /><span className="text-white/10">Orchestration</span>
                     </motion.h2>

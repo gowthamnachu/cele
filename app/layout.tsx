@@ -23,6 +23,9 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Celeb Sync",
   },
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export const viewport = {
@@ -32,6 +35,7 @@ export const viewport = {
 
 import Navbar from "@/components/Navbar";
 import PremiumCursor from "@/components/PremiumCursor";
+import Preloader from "@/components/Preloader";
 
 export default function RootLayout({
   children,
@@ -41,6 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${outfit.variable} font-sans bg-black text-white antialiased`}>
+        <Preloader />
         <PremiumCursor />
         {/* Extreme Premium Noise Overlay */}
         <div className="noise-overlay" />

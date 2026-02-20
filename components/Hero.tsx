@@ -21,7 +21,7 @@ export default function Hero() {
         <section
             id="home"
             ref={containerRef}
-            className="relative h-[110vh] flex items-center justify-center overflow-hidden bg-black pt-20"
+            className="relative h-[100svh] md:h-[110vh] flex items-center justify-center overflow-hidden bg-black pt-16 md:pt-20"
         >
             {/* Immersive Visual Center */}
             <motion.div
@@ -91,18 +91,18 @@ export default function Hero() {
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                     className="flex flex-col items-center w-full"
                 >
-                    <div className="inline-flex items-center gap-4 mb-8 md:mb-12">
-                        <div className="h-[1px] w-8 md:w-16 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                        <p className="text-white/40 uppercase tracking-[0.4em] md:tracking-[0.6em] text-[8px] md:text-[10px] font-black">
+                    <div className="inline-flex items-center gap-3 md:gap-4 mb-6 md:mb-12">
+                        <div className="h-[1px] w-6 md:w-16 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                        <p className="text-white/20 uppercase tracking-[0.4em] md:tracking-[0.6em] text-[9px] md:text-[10px] font-black">
                             Established Global Agency
                         </p>
-                        <div className="h-[1px] w-8 md:w-16 bg-gradient-to-r from-white/20 via-white/20 to-transparent rotate-180" />
+                        <div className="h-[1px] w-6 md:w-16 bg-gradient-to-r from-white/30 via-white/30 to-transparent rotate-180" />
                     </div>
 
                     <div className="max-w-7xl w-full px-4 md:px-0">
                         <StaggeredText
                             text="Digital Influence Redefined."
-                            className="text-[1.8rem] sm:text-[3.5rem] md:text-[6rem] lg:text-[8rem] xl:text-[10rem] font-black leading-[1.1] md:leading-[0.85] tracking-tighter md:tracking-[-0.05em] text-white uppercase mb-8 md:mb-10 w-full"
+                            className="text-[3.2rem] sm:text-[3.5rem] md:text-[6rem] lg:text-[8rem] xl:text-[10rem] font-black leading-[0.9] md:leading-[0.85] tracking-[-0.06em] md:tracking-[-0.05em] text-white uppercase mb-8 md:mb-10 w-full"
                         />
                     </div>
 
@@ -110,21 +110,21 @@ export default function Hero() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1.2, duration: 1.5 }}
-                        className="text-xs sm:text-base md:text-lg lg:text-xl text-white/40 max-w-xl font-light leading-relaxed mb-10 md:mb-16 px-4 md:px-0"
+                        className="text-sm sm:text-base md:text-lg lg:text-xl text-white/30 max-w-[280px] sm:max-w-xl font-light leading-[1.7] mb-10 md:mb-16 px-4 md:px-0"
                     >
-                        We curate elite human connections. Bridging the gap between the world's most iconic brands and culture-defining voices.
+                        We curate elite human connections. Bridging the gap between the world&apos;s most iconic brands and culture-defining voices.
                     </motion.p>
 
-                    <div className="flex flex-col sm:flex-row gap-4 md:gap-8 w-full sm:w-auto px-6 sm:px-0">
+                    <div className="flex flex-col sm:flex-row gap-4 md:gap-8 w-full sm:w-auto px-12 sm:px-0">
                         <Magnetic>
                             <motion.button
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 1.4 }}
-                                className="group relative px-8 py-4 md:px-16 md:py-7 overflow-hidden w-full sm:w-auto"
+                                className="group relative px-8 py-5 md:px-16 md:py-7 overflow-hidden w-full sm:w-auto"
                             >
                                 <div className="absolute inset-0 bg-white group-hover:bg-neutral-200 transition-colors" />
-                                <span className="relative text-black font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-[11px] z-10">
+                                <span className="relative text-black font-black uppercase tracking-[0.3em] text-[10px] md:text-[11px] z-10">
                                     Explore Strategy
                                 </span>
                             </motion.button>
@@ -134,10 +134,10 @@ export default function Hero() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 1.5 }}
-                                className="group relative px-8 py-4 md:px-16 md:py-7 border border-white/20 hover:border-white transition-all overflow-hidden w-full sm:w-auto"
+                                className="group relative px-8 py-5 md:px-16 md:py-7 border border-white/20 hover:border-white transition-all overflow-hidden w-full sm:w-auto"
                             >
                                 <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors" />
-                                <span className="relative text-white font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-[11px] z-10">
+                                <span className="relative text-white font-black uppercase tracking-[0.3em] text-[10px] md:text-[11px] z-10">
                                     Our Portfolio
                                 </span>
                             </motion.button>
@@ -145,6 +145,15 @@ export default function Hero() {
                     </div>
                 </motion.div>
             </div>
+
+            {/* Mobile Scroll Indicator */}
+            <motion.div
+                style={{ opacity }}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 md:hidden"
+            >
+                <p className="text-[7px] font-black tracking-[0.4em] text-white/20 uppercase">Scroll</p>
+                <div className="w-[1px] h-8 bg-gradient-to-b from-white/30 to-transparent" />
+            </motion.div>
 
             {/* Extreme Premium Navigation Indicators */}
             <motion.div
