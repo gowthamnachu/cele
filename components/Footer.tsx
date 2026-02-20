@@ -10,12 +10,12 @@ export default function Footer() {
             <div className="container mx-auto px-6 md:px-12">
                 <div className="flex flex-col md:flex-row justify-between items-center gap-12">
                     <div className="flex flex-col items-center md:items-start gap-6">
-                        <div className="relative w-40 h-10">
+                        <div className="relative w-20 h-20">
                             <Image
                                 src="/logo.svg"
                                 alt="Celeb Sync Logo"
                                 fill
-                                className="object-contain filter invert"
+                                className="object-contain brightness-0 invert"
                             />
                         </div>
                         <p className="text-muted text-xs tracking-widest uppercase font-bold">Strategic Influencer Marketing</p>

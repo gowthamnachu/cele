@@ -15,7 +15,7 @@ const navLinks = [
     { name: "Contact", href: "#contact" },
 ];
 
-const locations = ["Mumbai", "London", "Dubai"];
+const locations = ["Hyderabad"];
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -73,14 +73,15 @@ export default function Navbar() {
                     <div className="flex items-center gap-12">
                         <Magnetic>
                             <motion.div
-                                className="relative w-32 h-8 cursor-pointer"
+                                className="relative w-12 h-12 md:w-14 md:h-14 cursor-pointer"
                                 whileHover={{ scale: 1.05 }}
                             >
                                 <Image
                                     src="/logo.svg"
                                     alt="Celeb Sync Logo"
                                     fill
-                                    className="object-contain filter invert"
+                                    className="object-contain brightness-0 invert"
+                                    priority
                                 />
                             </motion.div>
                         </Magnetic>
