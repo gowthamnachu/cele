@@ -118,7 +118,7 @@ export default function WhyUs() {
                         </p>
                         <div>
                             <p className="text-2xl font-black uppercase tracking-tighter leading-tight mb-8">
-                                Let's Build
+                                Let&apos;s Build
                                 <br />
                                 Something
                                 <br />

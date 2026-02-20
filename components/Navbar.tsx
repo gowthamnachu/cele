@@ -46,9 +46,18 @@ export default function Navbar() {
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = "hidden";
+            document.body.style.touchAction = "none";
+            document.documentElement.style.overflow = "hidden";
         } else {
-            document.body.style.overflow = "unset";
+            document.body.style.overflow = "";
+            document.body.style.touchAction = "";
+            document.documentElement.style.overflow = "";
         }
+        return () => {
+            document.body.style.overflow = "";
+            document.body.style.touchAction = "";
+            document.documentElement.style.overflow = "";
+        };
     }, [isOpen]);
 
     const toggleMenu = () => setIsOpen(!isOpen);
@@ -148,63 +157,274 @@ export default function Navbar() {
                 </div>
             </motion.nav>
 
-            {/* Mobile Menu Overlay */}
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        key="mobile-menu"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.4 }}
-                        style={{ backgroundColor: "#0a0a0a" }}
-                        className="fixed top-0 left-0 right-0 bottom-0 z-[100] flex flex-col"
-                    >
-                        {/* Spacer for navbar */}
-                        <div className="h-24 flex-shrink-0" />
+            {/* ─── Premium Mobile Sidebar ─── */}
+            {isOpen && (
+                <div
+                    style={{
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                        width: "100vw",
+                        height: "100vh",
+                        backgroundColor: "#050505",
+                        zIndex: 100,
+                        display: "flex",
+                        flexDirection: "row",
+                        boxSizing: "border-box",
+                        overflow: "hidden",
+                        touchAction: "none",
+                    }}
+                >
+                    {/* Left Accent Stripe */}
+                    <div
+                        style={{
+                            width: "4px",
+                            background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.15) 30%, rgba(255,255,255,0.15) 70%, transparent)",
+                            flexShrink: 0,
+                        }}
+                    />
 
-                        {/* Nav Links */}
-                        <div className="flex-1 flex flex-col justify-center px-8">
+                    {/* Main Content Area */}
+                    <div
+                        style={{
+                            flex: 1,
+                            display: "flex",
+                            flexDirection: "column",
+                            padding: "0 28px",
+                            overflow: "hidden",
+                            position: "relative",
+                        }}
+                    >
+                        {/* Subtle radial glow for depth */}
+                        <div
+                            style={{
+                                position: "absolute",
+                                top: "-20%",
+                                right: "-30%",
+                                width: "80%",
+                                height: "60%",
+                                background: "radial-gradient(circle, rgba(255,255,255,0.015) 0%, transparent 70%)",
+                                pointerEvents: "none",
+                            }}
+                        />
+
+                        {/* Header — Navigation Label + Close Button */}
+                        <div
+                            style={{
+                                height: "80px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                flexShrink: 0,
+                                borderBottom: "1px solid rgba(255,255,255,0.05)",
+                            }}
+                        >
+                            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                                <span
+                                    style={{
+                                        width: "5px",
+                                        height: "5px",
+                                        borderRadius: "50%",
+                                        backgroundColor: "rgba(255,255,255,0.3)",
+                                        display: "inline-block",
+                                    }}
+                                />
+                                <span
+                                    style={{
+                                        fontSize: "10px",
+                                        fontWeight: 900,
+                                        color: "rgba(255,255,255,0.25)",
+                                        textTransform: "uppercase" as const,
+                                        letterSpacing: "0.3em",
+                                    }}
+                                >
+                                    Navigation
+                                </span>
+                            </div>
+
+                            {/* Close Button */}
+                            <button
+                                onClick={() => setIsOpen(false)}
+                                style={{
+                                    width: "40px",
+                                    height: "40px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    backgroundColor: "rgba(255,255,255,0.04)",
+                                    border: "1px solid rgba(255,255,255,0.08)",
+                                    borderRadius: "50%",
+                                    cursor: "pointer",
+                                    transition: "background-color 0.3s, border-color 0.3s",
+                                    padding: 0,
+                                }}
+                            >
+                                <svg
+                                    width="14"
+                                    height="14"
+                                    viewBox="0 0 14 14"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M1 1L13 13M13 1L1 13"
+                                        stroke="rgba(255,255,255,0.5)"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+
+                        {/* ─── Nav Links ─── */}
+                        <div
+                            style={{
+                                flex: 1,
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                gap: "4px",
+                                paddingRight: "12px",
+                            }}
+                        >
                             {navLinks.map((link, i) => (
-                                <motion.a
+                                <a
                                     key={link.name}
                                     href={link.href}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.15 + i * 0.08 }}
                                     onClick={() => setIsOpen(false)}
-                                    className="block py-3 text-4xl font-black uppercase tracking-tight text-white"
+                                    style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: "16px",
+                                        padding: "14px 0",
+                                        fontSize: "1.75rem",
+                                        fontWeight: 900,
+                                        textTransform: "uppercase" as const,
+                                        letterSpacing: "-0.03em",
+                                        color: "#ffffff",
+                                        textDecoration: "none",
+                                        borderBottom: "1px solid rgba(255,255,255,0.03)",
+                                        transition: "opacity 0.3s",
+                                    }}
                                 >
-                                    <span className="text-xs text-white/20 mr-4">0{i + 1}</span>
-                                    {link.name}
-                                </motion.a>
+                                    {/* Step Number */}
+                                    <span
+                                        style={{
+                                            fontSize: "9px",
+                                            fontWeight: 700,
+                                            color: "rgba(255,255,255,0.12)",
+                                            letterSpacing: "0.1em",
+                                            minWidth: "24px",
+                                        }}
+                                    >
+                                        0{i + 1}
+                                    </span>
+
+                                    {/* Dot Separator */}
+                                    <span
+                                        style={{
+                                            width: "3px",
+                                            height: "3px",
+                                            borderRadius: "50%",
+                                            backgroundColor: "rgba(255,255,255,0.08)",
+                                            flexShrink: 0,
+                                        }}
+                                    />
+
+                                    {/* Link Name */}
+                                    <span>{link.name}</span>
+                                </a>
                             ))}
                         </div>
 
-                        {/* Footer area */}
-                        <div className="flex-shrink-0 px-8 pb-10">
-                            <div className="border-t border-white/10 pt-6 mb-6">
-                                <div className="flex gap-8">
-                                    <div>
-                                        <p className="text-[8px] font-bold text-white/30 uppercase tracking-widest mb-1">Local</p>
-                                        <p className="text-base font-black text-white">{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-[8px] font-bold text-white/30 uppercase tracking-widest mb-1">GMT</p>
-                                        <p className="text-base font-black text-white">{new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' })}</p>
-                                    </div>
+                        {/* ─── Footer Section ─── */}
+                        <div
+                            style={{
+                                flexShrink: 0,
+                                paddingTop: "20px",
+                                paddingBottom: "32px",
+                                borderTop: "1px solid rgba(255,255,255,0.06)",
+                            }}
+                        >
+                            {/* Live Clocks */}
+                            <div style={{ display: "flex", gap: "40px", marginBottom: "24px" }}>
+                                <div>
+                                    <p
+                                        style={{
+                                            fontSize: "7px",
+                                            fontWeight: 800,
+                                            color: "rgba(255,255,255,0.15)",
+                                            textTransform: "uppercase" as const,
+                                            letterSpacing: "0.25em",
+                                            marginBottom: "6px",
+                                        }}
+                                    >
+                                        ● Local Time
+                                    </p>
+                                    <p style={{ fontSize: "18px", fontWeight: 900, color: "#ffffff", letterSpacing: "-0.02em" }}>
+                                        {time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
+                                    </p>
+                                </div>
+                                <div>
+                                    <p
+                                        style={{
+                                            fontSize: "7px",
+                                            fontWeight: 800,
+                                            color: "rgba(255,255,255,0.15)",
+                                            textTransform: "uppercase" as const,
+                                            letterSpacing: "0.25em",
+                                            marginBottom: "6px",
+                                        }}
+                                    >
+                                        ● GMT
+                                    </p>
+                                    <p style={{ fontSize: "18px", fontWeight: 900, color: "rgba(255,255,255,0.5)", letterSpacing: "-0.02em" }}>
+                                        {new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit", timeZone: "UTC" })}
+                                    </p>
                                 </div>
                             </div>
+
+                            {/* CTA Button */}
                             <button
-                                onClick={() => setIsOpen(false)}
-                                className="w-full py-5 bg-white text-black text-[10px] font-black uppercase tracking-[0.3em]"
+                                onClick={() => {
+                                    setIsOpen(false);
+                                    window.location.href = "#contact";
+                                }}
+                                style={{
+                                    width: "100%",
+                                    padding: "18px 0",
+                                    backgroundColor: "#ffffff",
+                                    color: "#000000",
+                                    fontSize: "9px",
+                                    fontWeight: 900,
+                                    textTransform: "uppercase" as const,
+                                    letterSpacing: "0.35em",
+                                    border: "none",
+                                    cursor: "pointer",
+                                    transition: "background-color 0.3s",
+                                }}
                             >
-                                Start Campaign
+                                Start Your Campaign →
                             </button>
+
+                            {/* Brand Mark */}
+                            <p
+                                style={{
+                                    marginTop: "16px",
+                                    textAlign: "center",
+                                    fontSize: "7px",
+                                    fontWeight: 700,
+                                    color: "rgba(255,255,255,0.06)",
+                                    textTransform: "uppercase" as const,
+                                    letterSpacing: "0.4em",
+                                }}
+                            >
+                                Celeb Sync © {new Date().getFullYear()}
+                            </p>
                         </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                    </div>
+                </div>
+            )}
         </>
     );
 }
