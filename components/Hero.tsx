@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import { useRef } from "react";
 import Magnetic from "./Magnetic";
 import StaggeredText from "./StaggeredText";
@@ -30,6 +31,23 @@ export default function Hero() {
                 <div className="relative w-full h-full max-w-[1400px] max-h-[800px]">
                     {/* Central Glow */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/[0.04] rounded-full blur-[180px]" />
+
+                    {/* Logo Watermark Background */}
+                    <motion.div
+                        style={{
+                            y: useTransform(scrollYProgress, [0, 1], [0, -300]),
+                            rotate: useTransform(scrollYProgress, [0, 1], [0, 25]),
+                            scale: useTransform(scrollYProgress, [0, 1], [1, 1.2]),
+                        }}
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] opacity-[0.05] select-none pointer-events-none"
+                    >
+                        <Image
+                            src="/logo-bg.svg"
+                            alt=""
+                            fill
+                            className="object-contain filter invert brightness-0"
+                        />
+                    </motion.div>
 
                     {/* Floating Organic Shapes (Premium CSS alternative to images) */}
                     <motion.div
@@ -66,45 +84,47 @@ export default function Hero() {
                 </div>
             </motion.div>
 
-            <div className="container mx-auto px-6 md:px-12 z-10 flex flex-col items-center text-center">
+            <div className="container mx-auto px-4 sm:px-6 md:px-12 z-10 flex flex-col items-center text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                    className="flex flex-col items-center"
+                    className="flex flex-col items-center w-full"
                 >
-                    <div className="inline-flex items-center gap-4 mb-10">
-                        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                        <p className="text-white/40 uppercase tracking-[0.6em] text-[10px] font-black">
+                    <div className="inline-flex items-center gap-4 mb-8 md:mb-12">
+                        <div className="h-[1px] w-8 md:w-16 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                        <p className="text-white/40 uppercase tracking-[0.4em] md:tracking-[0.6em] text-[8px] md:text-[10px] font-black">
                             Established Global Agency
                         </p>
-                        <div className="h-[1px] w-12 bg-gradient-to-r from-white/20 via-white/20 to-transparent rotate-180" />
+                        <div className="h-[1px] w-8 md:w-16 bg-gradient-to-r from-white/20 via-white/20 to-transparent rotate-180" />
                     </div>
 
-                    <StaggeredText
-                        text="Digital Influence Redefined."
-                        className="text-6xl md:text-8xl lg:text-[10rem] font-black leading-[0.85] tracking-[-0.05em] text-white uppercase max-w-5xl mb-10"
-                    />
+                    <div className="max-w-7xl w-full px-4 md:px-0">
+                        <StaggeredText
+                            text="Digital Influence Redefined."
+                            className="text-[1.8rem] sm:text-[3.5rem] md:text-[6rem] lg:text-[8rem] xl:text-[10rem] font-black leading-[1.1] md:leading-[0.85] tracking-tighter md:tracking-[-0.05em] text-white uppercase mb-8 md:mb-10 w-full"
+                        />
+                    </div>
 
                     <motion.p
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1.2, duration: 1.5 }}
-                        className="text-lg md:text-xl text-white/50 max-w-2xl font-light leading-relaxed mb-16"
+                        className="text-xs sm:text-base md:text-lg lg:text-xl text-white/40 max-w-xl font-light leading-relaxed mb-10 md:mb-16 px-4 md:px-0"
                     >
                         We curate elite human connections. Bridging the gap between the world's most iconic brands and culture-defining voices.
                     </motion.p>
 
-                    <div className="flex flex-col sm:flex-row gap-8">
+                    <div className="flex flex-col sm:flex-row gap-4 md:gap-8 w-full sm:w-auto px-6 sm:px-0">
                         <Magnetic>
                             <motion.button
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 1.4 }}
-                                className="group relative px-16 py-7 overflow-hidden"
+                                className="group relative px-8 py-4 md:px-16 md:py-7 overflow-hidden w-full sm:w-auto"
                             >
                                 <div className="absolute inset-0 bg-white group-hover:bg-neutral-200 transition-colors" />
-                                <span className="relative text-black font-black uppercase tracking-[0.3em] text-[11px] z-10">
+                                <span className="relative text-black font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-[11px] z-10">
                                     Explore Strategy
                                 </span>
                             </motion.button>
@@ -114,10 +134,10 @@ export default function Hero() {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 1.5 }}
-                                className="group relative px-16 py-7 border border-white/10 overflow-hidden"
+                                className="group relative px-8 py-4 md:px-16 md:py-7 border border-white/20 hover:border-white transition-all overflow-hidden w-full sm:w-auto"
                             >
                                 <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors" />
-                                <span className="relative text-white font-black uppercase tracking-[0.3em] text-[11px] z-10">
+                                <span className="relative text-white font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-[11px] z-10">
                                     Our Portfolio
                                 </span>
                             </motion.button>

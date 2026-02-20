@@ -127,20 +127,20 @@ export default function Navbar() {
                         {/* Mobile Toggle */}
                         <button
                             onClick={toggleMenu}
-                            className="md:hidden text-white p-2 relative z-[70]"
+                            className="md:hidden text-white p-2 relative z-[110]"
                         >
                             <div className="w-6 h-5 flex flex-col justify-between items-end">
                                 <motion.span
                                     animate={isOpen ? { rotate: 45, y: 9, width: "100%" } : { rotate: 0, y: 0, width: "100%" }}
-                                    className="h-[1px] bg-white block"
+                                    className="h-[1.5px] bg-white block"
                                 />
                                 <motion.span
                                     animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-                                    className="h-[1px] bg-white block w-3/4"
+                                    className="h-[1.5px] bg-white block w-3/4"
                                 />
                                 <motion.span
                                     animate={isOpen ? { rotate: -45, y: -10, width: "100%" } : { rotate: 0, y: 0, width: "1/2" }}
-                                    className="h-[1px] bg-white block w-1/2"
+                                    className="h-[1.5px] bg-white block"
                                 />
                             </div>
                         </button>
@@ -148,63 +148,59 @@ export default function Navbar() {
                 </div>
             </motion.nav>
 
-            {/* Mobile Menu Overlay with Circular Mask */}
+            {/* Mobile Menu Overlay */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ clipPath: "circle(0% at 90% 5%)" }}
-                        animate={{ clipPath: "circle(150% at 90% 5%)" }}
-                        exit={{ clipPath: "circle(0% at 90% 5%)" }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className="fixed inset-0 bg-black z-50 flex flex-col p-12 overflow-hidden"
+                        key="mobile-menu"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.4 }}
+                        style={{ backgroundColor: "#0a0a0a" }}
+                        className="fixed top-0 left-0 right-0 bottom-0 z-[100] flex flex-col"
                     >
-                        <div className="flex-1 flex flex-col justify-center">
-                            <div className="flex flex-col space-y-6">
-                                {navLinks.map((link, i) => (
-                                    <motion.a
-                                        key={link.name}
-                                        href={link.href}
-                                        initial={{ opacity: 0, x: -30 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: 0.3 + i * 0.1 }}
-                                        onClick={() => setIsOpen(false)}
-                                        className="text-5xl font-black uppercase tracking-tighter text-white hover:text-muted transition-colors flex items-center gap-6 group"
-                                    >
-                                        <span className="text-[14px] font-black text-white/10 group-hover:text-white/40 transition-colors">0{i + 1}</span>
-                                        {link.name}
-                                    </motion.a>
-                                ))}
-                            </div>
+                        {/* Spacer for navbar */}
+                        <div className="h-24 flex-shrink-0" />
+
+                        {/* Nav Links */}
+                        <div className="flex-1 flex flex-col justify-center px-8">
+                            {navLinks.map((link, i) => (
+                                <motion.a
+                                    key={link.name}
+                                    href={link.href}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.15 + i * 0.08 }}
+                                    onClick={() => setIsOpen(false)}
+                                    className="block py-3 text-4xl font-black uppercase tracking-tight text-white"
+                                >
+                                    <span className="text-xs text-white/20 mr-4">0{i + 1}</span>
+                                    {link.name}
+                                </motion.a>
+                            ))}
                         </div>
 
-                        <div className="mt-auto flex flex-col md:flex-row justify-between items-end md:items-center gap-12 border-t border-white/10 pt-12">
-                            <div className="space-y-4">
-                                <p className="text-[10px] font-black text-white/20 uppercase tracking-[0.3em]">Live Global Time</p>
+                        {/* Footer area */}
+                        <div className="flex-shrink-0 px-8 pb-10">
+                            <div className="border-t border-white/10 pt-6 mb-6">
                                 <div className="flex gap-8">
-                                    <div className="space-y-1">
-                                        <p className="text-[9px] font-black text-white/40 uppercase tracking-widest">Local</p>
-                                        <p className="text-xl font-black text-white">{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</p>
+                                    <div>
+                                        <p className="text-[8px] font-bold text-white/30 uppercase tracking-widest mb-1">Local</p>
+                                        <p className="text-base font-black text-white">{time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                                     </div>
-                                    <div className="space-y-1">
-                                        <p className="text-[9px] font-black text-white/40 uppercase tracking-widest">GMT</p>
-                                        <p className="text-xl font-black text-white">{new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'UTC' })}</p>
+                                    <div>
+                                        <p className="text-[8px] font-bold text-white/30 uppercase tracking-widest mb-1">GMT</p>
+                                        <p className="text-base font-black text-white">{new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' })}</p>
                                     </div>
                                 </div>
                             </div>
-
-                            <Magnetic>
-                                <button
-                                    onClick={() => setIsOpen(false)}
-                                    className="px-12 py-6 bg-white text-black text-[10px] font-black uppercase tracking-[0.3em]"
-                                >
-                                    Initiate Connection
-                                </button>
-                            </Magnetic>
-                        </div>
-
-                        {/* Background branding element */}
-                        <div className="absolute top-1/2 -right-20 -translate-y-1/2 opacity-[0.02] text-[40vw] font-black tracking-tighter select-none leading-none rotate-90">
-                            CELEB
+                            <button
+                                onClick={() => setIsOpen(false)}
+                                className="w-full py-5 bg-white text-black text-[10px] font-black uppercase tracking-[0.3em]"
+                            >
+                                Start Campaign
+                            </button>
                         </div>
                     </motion.div>
                 )}

@@ -57,31 +57,37 @@ export default function Process() {
 
                 <div className="relative">
                     {/* Animated Timeline Line */}
-                    <div className="absolute left-[11px] md:left-1/2 top-0 bottom-0 w-[1px] bg-white/10 -translate-x-1/2" />
+                    <div className="absolute left-[12px] md:left-1/2 top-0 bottom-0 w-[1px] bg-white/10 -translate-x-1/2" />
                     <motion.div
                         style={{ scaleY: scrollYProgress }}
-                        className="absolute left-[11px] md:left-1/2 top-0 bottom-0 w-[1px] bg-white -translate-x-1/2 origin-top z-10"
+                        className="absolute left-[12px] md:left-1/2 top-0 bottom-0 w-[1px] bg-white -translate-x-1/2 origin-top z-10"
                     />
 
                     <div className="space-y-32">
                         {steps.map((step, index) => (
                             <div key={index} className={`relative flex items-center ${index % 2 === 0 ? "md:flex-row-reverse" : "md:flex-row"}`}>
                                 {/* Timeline Dot */}
-                                <div className="absolute left-0 md:left-1/2 w-6 h-6 bg-black border-[1px] border-white z-20 -translate-x-1/2 rounded-full" />
+                                <div className="absolute left-[12px] md:left-1/2 w-6 h-6 bg-black border-[1px] border-white z-20 -translate-x-1/2 rounded-full" />
 
                                 {/* Content */}
                                 <motion.div
                                     initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
                                     whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.8 }}
-                                    className={`w-full md:w-1/2 pl-12 md:pl-0 ${index % 2 === 0 ? "md:pr-24 text-left md:text-right" : "md:pl-24"}`}
+                                    viewport={{ once: true, margin: "-100px" }}
+                                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                                    className={`w-full md:w-1/2 pl-12 md:pl-0 ${index % 2 === 0 ? "md:pr-24 text-left md:text-right" : "md:pl-24 text-left"}`}
                                 >
-                                    <span className="text-muted font-bold tracking-widest text-[10px] uppercase mb-2 block">Step {index + 1}</span>
-                                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">{step.title}</h3>
-                                    <p className="text-muted text-base max-w-md mx-auto md:mx-0">
-                                        {step.description}
-                                    </p>
+                                    <div className={`flex flex-col ${index % 2 === 0 ? "md:items-end" : "md:items-start"} items-start`}>
+                                        <span className="text-white/20 font-black tracking-[0.4em] text-[10px] uppercase mb-4">
+                                            {index < 9 ? `0${index + 1}` : index + 1}
+                                        </span>
+                                        <h3 className="text-2xl md:text-4xl font-black text-white uppercase tracking-tighter mb-4 leading-none">
+                                            {step.title}
+                                        </h3>
+                                        <p className="text-muted text-sm md:text-base max-w-sm font-light leading-relaxed">
+                                            {step.description}
+                                        </p>
+                                    </div>
                                 </motion.div>
                             </div>
                         ))}
