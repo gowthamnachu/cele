@@ -30,8 +30,7 @@ export default function Footer() {
 
                     <div className="text-center md:text-right">
                         <p className="text-muted text-xs font-medium">© {new Date().getFullYear()} Celeb Sync Agency.</p>
-                        <p className="text-white/20 text-[9px] mt-1 font-black tracking-widest uppercase mb-1">Designed and Crafted by Nachu Gowtham</p>
-                        <p className="text-muted text-[10px] font-bold tracking-widest uppercase">All Rights Reserved.</p>
+                        <p className="text-muted text-[10px] font-bold tracking-widest uppercase mt-4">All Rights Reserved.</p>
                     </div>
                 </div>
 
@@ -43,7 +42,7 @@ export default function Footer() {
                     className="mt-16 pt-8 border-t border-white/[0.03] text-center"
                 >
                     <p className="text-[10px] text-white/10 uppercase tracking-[1em] font-black">
-                        POWERED BY IMPACT
+                        Designed and Crafted by Gowtham Nachu
                     </p>
                 </motion.div>
             </div>
